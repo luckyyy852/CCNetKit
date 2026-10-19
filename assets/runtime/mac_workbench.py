@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import re
 import secrets
+from socketserver import TCPServer
 import subprocess
 import sys
 import tempfile
@@ -353,6 +354,14 @@ class Workbench:
         return {"ok": True, "message": "规则已保存并检查。" + ("该域名仍继承父域直连规则。" if parent and action == "Default" else "")}
 
 
+class LoopbackHTTPServer(HTTPServer):
+    def server_bind(self):
+        # HTTPServer normally reverse-resolves its address here. The UI only binds
+        # numeric loopback, so DNS availability must not delay local startup.
+        TCPServer.server_bind(self)
+        self.server_name, self.server_port = self.server_address[:2]
+
+
 def make_server(workbench, page):
     token = secrets.token_urlsafe(32)
 
@@ -409,7 +418,7 @@ def make_server(workbench, page):
             except Exception:
                 self.send(400, {"message": "操作未完成，请检查域名、文件权限和核心状态。"})
 
-    server = HTTPServer(("127.0.0.1", 0), Handler)
+    server = LoopbackHTTPServer(("127.0.0.1", 0), Handler)
     return server, "http://127.0.0.1:" + str(server.server_port) + "/#" + token
 
 

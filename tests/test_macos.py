@@ -252,6 +252,16 @@ class MacTests(unittest.TestCase):
             self.assertEqual(state["rows"][0]["route"], "直连")
             self.assertNotIn("secret", json.dumps(state))
 
+    def test_local_ui_startup_does_not_resolve_dns(self):
+        with patch("socket.getfqdn", side_effect=AssertionError("Local UI must not resolve DNS")):
+            server, _ = app.make_server(self.instance(), b"synthetic-ui")
+        try:
+            self.assertEqual(server.server_address[0], "127.0.0.1")
+            self.assertEqual(server.server_port, server.server_address[1])
+            self.assertGreater(server.server_port, 0)
+        finally:
+            server.server_close()
+
     def test_http_session_authorization_origin_and_no_secret_response(self):
         window = self.instance()
         server, url = app.make_server(window, b"synthetic-ui")
