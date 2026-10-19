@@ -1,9 +1,9 @@
 ---
 name: windows-network-workbench
-description: 专为 Claude Code 的本机网络适配与专用线路配置设计，自动识别 Windows 或 macOS，使用自有节点接入 Mihomo，兼顾日常分流、软件接入和网站中转；Windows 附专用核心守卫，Mac 保护按目标机能力单独验证。
+description: CCNetKit，专为 Claude Code 的本机网络适配与专用线路配置设计，自动识别 Windows 或 macOS，使用自有节点接入 Mihomo，兼顾日常分流、软件接入和网站中转；Windows 附专用核心守卫，Mac 保护按目标机能力单独验证。
 ---
 
-# 网络分流工作台
+# CCNetKit
 
 核心用途是为 Claude Code 配置本机网络接入与专用线路，按系统能力处理连接保护，并保留使用者原有日常网络与网站中转。使用自有 VPS 或代理服务，配套交付 Mihomo 分流环境、本地管理界面及可恢复的域名规则。节点、账户、机器状态和凭据始终保存在仓库之外，不上传网络配置。
 
