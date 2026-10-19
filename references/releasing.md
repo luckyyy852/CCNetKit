@@ -24,6 +24,8 @@ python .\scripts\audit_release.py .
 
 Mac 测试还需在 macOS 执行 `python3 tests/test_macos.py`，包括 POSIX 文件锁和权限检查。工作流已添加 macOS 测试任务，但仅编写任务不等于已经运行。发布者没有 Mac 真机时应保留 README 中的验证范围说明，不能把 Windows 合成测试宣传成 Mac 真机验收。
 
+GitHub Actions 在 main 更新、拉取请求或手动运行时检查；发布标签不重复触发同一份测试，同一分支或拉取请求只保留最新任务。单个任务开始执行后限时 15 分钟，此限时不包括等待执行机器的排队时间。遇到长时间排队先核对 GitHub 服务状态和实际任务记录，不把排队或取消写成测试通过。
+
 scripts/release_manifest.py 是唯一白名单来源。新增通用源码时同步更新它；不要为了让扫描通过而把运行文件加入白名单。
 
 ```powershell
