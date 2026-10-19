@@ -25,6 +25,8 @@ IPv4 和 IPv6 入口均取决于本地网络可达性；只有 IPv4 的网络不
 
 已有可用 Mihomo 时复用，不另起冲突的内核。首次安装：
 
+先检查下载是否可达；不能下载时保留原有网络，请用户提供从官方获取的对应平台离线包路径，再核验来源与可得校验信息。不把安装依赖设成尚未建立的代理，也不转用不明镜像。下文的 E 盘路径都是通用示例，由 AI 按目标机器选择实际可用目录，无需用户拥有 E 盘。
+
 1. 打开 [官方安装页](https://wiki.metacubex.one/startup/) 或 [MetaCubeX/mihomo 稳定版发行页](https://github.com/MetaCubeX/mihomo/releases/latest)。选择 Windows 与实际 CPU 架构：常见 Intel / AMD 64 位为 amd64，Windows ARM 设备为 arm64；旧 CPU 应选择满足其指令集的构建，不盲选最高优化级别。
 2. 下载对应压缩包并解压；将可执行文件保存为 `E:\Tools\mihomo\mihomo.exe`。路径可自行替换。若发行页提供校验值，核对下载文件的 SHA-256；自己算出哈希不等于完成官方校验。不要从广告下载站获取同名程序。
 3. 创建新的私人目录 `E:\PrivateNetwork`。运行以下命令只检查版本、占用，不修改系统网络：
@@ -217,7 +219,14 @@ DNS 端口也要检查空闲；示例 DNS 需要在实际网络能访问，代�
 - `DataDirectory`: `E:\PrivateNetwork`
 - 只有日常可编辑配置加入 `Profiles`。专用配置与网站环境文件按 [接入说明](integration.md) 加入保护。
 
-执行 README 的检查、安装与普通用户启动步骤。若新 TUN 内核以管理员运行，后端修改需管理员许可，窗口查询受目标机器权限限制时应核对，不降低内核或配置保护。窗口可搜索实际连接、将指定网址设为国内直连、恢复默认分流。节点订阅更新和启动仍由自己选择的客户端或内核启动方式管理。
+由 AI 在技能根目录执行以下检查与安装，示例路径替换为目标机器的实际目录；安装命令需要管理员 PowerShell：
+
+```powershell
+.\scripts\Inspect-Settings.ps1 -SettingsPath E:\PrivateNetwork\settings.json
+.\scripts\Install-Workbench.ps1 -InstallRoot E:\Tools\NetworkWorkbench -SettingsPath E:\PrivateNetwork\settings.json
+```
+
+安装后普通用户打开安装目录中的 `bin\Workbench.exe`。安装器只接受新的安装目录；已有安装按 [维护说明](maintenance.md) 更新。若脚本被执行策略阻止，先核对下载来源和文件标记，仅按本机策略处理本次可信脚本，不永久放开全机策略。若新 TUN 内核以管理员运行，后端修改需管理员许可，窗口查询受目标机器权限限制时应核对，不降低内核或配置保护。窗口可搜索实际连接、将指定网址设为国内直连、恢复默认分流。节点订阅更新和启动仍由自己选择的客户端或内核启动方式管理。
 
 开机自动启动是单独的配置步骤：需要时，使用所选客户端的开机启动功能，或在 Windows 任务计划程序中为自己的实例创建登录触发任务。程序填写 `E:\Tools\mihomo\mihomo.exe`，参数填写 `-d E:\PrivateNetwork -f E:\PrivateNetwork\daily-tun.json`，起始目录填写 `E:\PrivateNetwork`。任务身份必须能读到私人配置；TUN 选择有管理员权限的身份与最高权限。应先关闭刚才前台启动的同一个实例，避免重复启动；关闭任务时只处理它自己的进程。先验证一次重启与一次待机恢复，再报告自动连接已验证。不要将他人机器的守卫、计划任务、电源设置直接搬过来；已有专用应用仍遵守原防直连和手动解锁策略。
 

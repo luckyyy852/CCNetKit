@@ -8,6 +8,8 @@
 
 管理界面需要 Python 3.10+；先检查 `python3 --version`。缺少时按目标机环境从 [Python 官方](https://www.python.org/downloads/macos/) 或已有包管理器安装，不默认安装 Homebrew、开发工具链或 PowerShell。
 
+先核对依赖下载是否可达；受限时复用已有可信工具，或由用户提供官方离线包路径，不依赖尚未配置好的同一条代理。安装前由 AI 创建所选私人目录和安装目录的父目录，设置相应权限；安装器不会替用户创建缺失的父目录。
+
 没有 Mihomo 时，从 [官方安装页](https://wiki.metacubex.one/startup/) 获取对应 `darwin-arm64` 或 `darwin-amd64` 的稳定内核，按官方校验信息核对，再放入用户私人工具目录。不要关闭系统安全功能来运行不明二进制。
 
 ## 接入自己的节点

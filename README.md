@@ -6,7 +6,16 @@
 
 ## 怎么使用
 
-从本仓库的 Releases 下载发布包。解压后保留 `windows-network-workbench` 文件夹名，将它放入 AI 编程工具的技能目录，或让工具读取 `SKILL.md`，然后说：
+从本仓库的 Releases 下载 `windows-network-workbench-v版本号.zip` 发布包，解压后保留整个 `windows-network-workbench` 文件夹，里面应直接看到 `SKILL.md`。放入对应工具的个人技能目录：
+
+| AI 工具 | 文件夹放到哪里 | 如何调用 |
+| --- | --- | --- |
+| Codex | `~/.agents/skills/windows-network-workbench/` | `$windows-network-workbench` |
+| Claude Code 本机版 | `~/.claude/skills/windows-network-workbench/` | `/windows-network-workbench` |
+
+`~` 是当前用户主目录；找不到目录或工具不识别时，让 AI 按它的实际版本检查，也可直接告诉 AI 解压位置，让它读取该文件夹的 `SKILL.md`。仅上传到网页聊天或云端会话，不能自动配置你的本机网络。[Codex 官方说明](https://developers.openai.com/codex/skills/) / [Claude Code 官方说明](https://code.claude.com/docs/en/skills)。
+
+下面的指令可直接发给 Codex；Claude Code 使用上表中的 `/windows-network-workbench` 调用，再说明相同目标：
 
 ```text
 使用 $windows-network-workbench，识别我的系统，使用我自己的节点为 Claude Code 配置专用网络并安装管理界面，保留已有保护、日常分流和网站中转，不上传私人配置。
@@ -24,6 +33,8 @@ AI 会先检查系统和已有代理，识别可复用的配置。**你不必先
 
 这是供 AI 编程工具执行的技能和源码包，需要本机配置，不是双击就能完成全部部署的安装器。
 
+完成后，AI 应告诉你从哪里打开、是否已联网、是否开机自动连接，以及出问题时如何恢复；安装了管理窗口不等于已经完成 Claude Code 接入。
+
 **配置 Claude Code 专用网络前，请自行准备尽可能干净、稳定的代理出口 IP，尽量避免有滥用记录或大量共享的出口。** 本工具负责分流与连接保护，不能改善 IP 信誉，也不保证免除平台验证。
 
 网络保护不等于项目文件访问隔离；若要阻止 Claude Code 读取 `.env` 或密钥文件，还需单独配置读取权限。
@@ -32,10 +43,12 @@ AI 会先检查系统和已有代理，识别可复用的配置。**你不必先
 
 | 系统 | 管理界面 | 环境要求 |
 | --- | --- | --- |
-| Windows 10/11 | 桌面窗口 | PowerShell 5.1、.NET Framework 4.x |
+| 64 位 Windows 10/11 | 桌面窗口 | PowerShell 5.1、.NET Framework 4.x 编译器 |
 | macOS | 本机浏览器界面 | Python 3.10 或更新版本、现有浏览器 |
 
 安装管理界面本身不切换网络，不启动代理，不改开机设置。已有代理优先复用，避免同时开启两个 TUN；需要接管网络时由 skill 按当前环境配置。
+
+工作台的域名按钮需要接入 Mihomo 的持久 JSON 配置，不能直接管理任意 VPN。AI 会先检查兼容性；不能安全接入时保留原客户端，说明限制，不强行替换正常网络。
 
 Mac 支持安装、连接查询、搜索、域名直连和恢复默认功能，目前尚未完成真机验证。月度用量和附带的专用核心守卫仅 Windows 提供。Mac 严格防直连需要另行接入并验证系统出站隔离，不能仅靠代理设置保证。
 
