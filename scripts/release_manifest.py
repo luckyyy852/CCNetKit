@@ -24,6 +24,7 @@ FILES = (
     "tests/Test-ProtectionPolicy.ps1",
     "tests/Test-ProtectedCore.ps1",
     "tests/Test-ServiceBrowser.ps1",
+    "tests/Test-FreshInstall.ps1", "tests/test_fresh_install.py",
     "references/integration.md", "references/maintenance.md", "references/user-guide.md",
     "references/releasing.md",
     "references/mihomo-setup.md",

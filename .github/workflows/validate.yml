@@ -24,6 +24,8 @@ jobs:
         run: python3 tests/test_macos.py
       - name: Test release scanner
         run: python3 tests/test_release.py
+      - name: Test fresh archive, Mac install and installed local UI
+        run: python3 tests/test_fresh_install.py
       - name: Audit source allowlist
         run: python3 scripts/audit_release.py .
   windows-tests:
@@ -49,5 +51,8 @@ jobs:
       - name: Test service-browser planning without launching real browsers
         shell: powershell
         run: ./tests/Test-ServiceBrowser.ps1 -WorkRoot (Join-Path $env:RUNNER_TEMP ('service-browser-' + [guid]::NewGuid().ToString('N')))
+      - name: Test fresh archive and real Windows installer
+        shell: powershell
+        run: ./tests/Test-FreshInstall.ps1 -RequireAdmin -WorkRoot (Join-Path $env:RUNNER_TEMP ('fresh-install-' + [guid]::NewGuid().ToString('N')))
       - name: Audit publishable source files
         run: python scripts/audit_release.py .

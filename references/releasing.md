@@ -15,8 +15,12 @@
 .\tests\Test-ServiceBrowser.ps1 -WorkRoot E:\Temp\ServiceBrowserTests
 python .\tests\test_release.py
 python .\tests\test_macos.py
+python .\tests\test_fresh_install.py
+.\tests\Test-FreshInstall.ps1 -WorkRoot E:\Temp\FreshInstallTests
 python .\scripts\audit_release.py .
 ```
+
+首次安装检查会打包、解压到含空格和中文的私人测试目录，再运行解压后的安装入口；只使用合成数据和回环控制器。Windows 非管理员运行只验证拒绝安装且无残留，不能当作管理员安装通过；CI 使用 `-RequireAdmin` 实际验证安装、权限、界面读取、域名往返及重复安装拒绝。Mac 安装与本地界面启动在 Mac CI 执行，窗口中离线核心必须显示为未连通，不假装外网已通。
 
 测试输出也不要放回源码目录。扫描只返回相对文件名和类别，不复述匹配内容。若有权限比对本机真实敏感值，可向 audit 的 deny_values 参数传入内存数据，或使用仓库外的本地 JSON 列表；不要把真实值列表提交或打包。
 
