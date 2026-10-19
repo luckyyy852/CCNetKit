@@ -1,0 +1,17 @@
+{
+  "SchemaVersion": 1,
+  "Profiles": [
+    {
+      "Name": "日常 TUN",
+      "ConfigPath": "E:\\PrivateNetwork\\daily-tun.json",
+      "ExecutablePath": "E:\\Tools\\mihomo\\mihomo.exe",
+      "DataDirectory": "E:\\PrivateNetwork",
+      "ManageRules": true,
+      "Reload": true,
+      "ProtectedRules": []
+    }
+  ],
+  "ProtectedFiles": [],
+  "Protection": null,
+  "Billing": null
+}

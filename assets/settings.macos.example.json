@@ -1,0 +1,17 @@
+{
+  "SchemaVersion": 1,
+  "Profiles": [
+    {
+      "Name": "日常分流",
+      "ConfigPath": "/Users/example/PrivateNetwork/daily.json",
+      "ExecutablePath": "/Users/example/Tools/mihomo/mihomo",
+      "DataDirectory": "/Users/example/PrivateNetwork",
+      "ManageRules": true,
+      "Reload": true,
+      "ProtectedRules": []
+    }
+  ],
+  "ProtectedFiles": [],
+  "Protection": null,
+  "Billing": null
+}

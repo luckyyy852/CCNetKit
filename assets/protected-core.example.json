@@ -1,0 +1,27 @@
+{
+  "mixed-port": 17900,
+  "allow-lan": false,
+  "bind-address": "127.0.0.1",
+  "mode": "rule",
+  "log-level": "warning",
+  "external-controller": "127.0.0.1:19093",
+  "secret": "YOUR_DEDICATED_CONTROLLER_SECRET",
+  "interface-name": "YOUR_PHYSICAL_ADAPTER",
+  "tun": { "enable": false },
+  "dns": { "enable": false },
+  "proxies": [
+    {
+      "name": "OWN-FIXED-NODE",
+      "type": "socks5",
+      "server": "192.0.2.10",
+      "port": 1080,
+      "username": "YOUR_PROXY_USERNAME",
+      "password": "YOUR_PROXY_PASSWORD",
+      "udp": false
+    }
+  ],
+  "proxy-groups": [
+    { "name": "CC-ONLY", "type": "select", "proxies": ["OWN-FIXED-NODE"] }
+  ],
+  "rules": ["NETWORK,udp,REJECT", "MATCH,CC-ONLY"]
+}

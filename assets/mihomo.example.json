@@ -1,0 +1,34 @@
+{
+  "mixed-port": 7890,
+  "allow-lan": false,
+  "bind-address": "127.0.0.1",
+  "mode": "rule",
+  "log-level": "warning",
+  "ipv6": true,
+  "external-controller": "127.0.0.1:9090",
+  "secret": "YOUR_LOCAL_CONTROLLER_SECRET",
+  "find-process-mode": "strict",
+  "tun": { "enable": false },
+  "dns": { "enable": false },
+  "proxies": [
+    {
+      "name": "MY-NODE",
+      "type": "socks5",
+      "server": "192.0.2.10",
+      "port": 1080,
+      "username": "YOUR_PROXY_USERNAME",
+      "password": "YOUR_PROXY_PASSWORD",
+      "udp": false
+    }
+  ],
+  "proxy-groups": [
+    { "name": "PROXY", "type": "select", "proxies": ["MY-NODE"] }
+  ],
+  "rules": [
+    "DOMAIN,localhost,DIRECT",
+    "DOMAIN-SUFFIX,local,DIRECT",
+    "DOMAIN-SUFFIX,lan,DIRECT",
+    "DOMAIN-SUFFIX,cn,DIRECT",
+    "MATCH,PROXY"
+  ]
+}

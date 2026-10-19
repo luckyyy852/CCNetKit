@@ -1,0 +1,7 @@
+{
+  "SchemaVersion": 1,
+  "CoreExecutablePath": "E:\\Tools\\mihomo\\mihomo.exe",
+  "CoreConfigPath": "E:\\PrivateNetwork\\protected-core.json",
+  "CoreDataDirectory": "E:\\PrivateNetwork\\protected-core-data",
+  "StateDirectory": "E:\\PrivateNetwork\\protected-state"
+}

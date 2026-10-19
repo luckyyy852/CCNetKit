@@ -1,0 +1,31 @@
+"""Publishable source and reviewed synthetic demo image. No runtime directories."""
+BINARY_SHA256 = {
+    "assets/workbench-demo.png": "430b5aacad86a5e2da787b07f2712c6617646ed54fa2031cb1198d7e8b0a0bce",
+}
+FILES = (
+    ".gitignore", ".gitattributes", ".github/workflows/validate.yml",
+    "SKILL.md", "README.md", "LICENSE", "agents/openai.yaml",
+    "assets/settings.example.json",
+    "assets/settings.macos.example.json",
+    "assets/runtime/mac_workbench.py", "assets/runtime/mac_ui.html",
+    "scripts/workbench.py", "tests/test_macos.py", "references/macos.md",
+    "assets/mihomo.example.json",
+    "assets/workbench-demo.png",
+    "assets/protected-core.example.json", "assets/protected-session.example.json",
+    "assets/service-browser.example.json",
+    "assets/runtime/Workbench.cs", "assets/runtime/Search.cs", "assets/runtime/Billing.cs",
+    "assets/runtime/Workbench.Common.ps1", "assets/runtime/RoutePolicy.ps1",
+    "assets/runtime/Set-DomainRoute.ps1", "assets/runtime/Diagnose.ps1",
+    "scripts/Build-Workbench.ps1", "scripts/Inspect-Settings.ps1", "scripts/Install-Workbench.ps1",
+    "scripts/audit_release.py", "scripts/package_release.py", "scripts/release_manifest.py",
+    "scripts/Protection.Policy.ps1", "scripts/Watch-ProtectedCore.ps1",
+    "scripts/Open-ServiceBrowser.ps1",
+    "tests/MockCore.cs", "tests/Test-Workbench.ps1", "tests/test_release.py",
+    "tests/Test-ProtectionPolicy.ps1",
+    "tests/Test-ProtectedCore.ps1",
+    "tests/Test-ServiceBrowser.ps1",
+    "references/integration.md", "references/maintenance.md", "references/user-guide.md",
+    "references/releasing.md",
+    "references/mihomo-setup.md",
+    "references/network-compatibility.md", "references/application-routing.md", "references/cc-protection.md",
+)

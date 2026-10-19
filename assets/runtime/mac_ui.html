@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>网络分流工作台</title>
+<style>
+body{font:14px -apple-system,BlinkMacSystemFont,sans-serif;color:#15243b;background:#fff;margin:32px auto;max-width:1080px;padding:0 20px}
+h1{font-size:21px;font-weight:500;color:#1565ef}p{line-height:1.7}input,button{font:inherit;padding:9px 12px;border:1px solid #bccde8;border-radius:6px;background:#fff}input{width:min(380px,85%)}button{color:#145dcc;cursor:pointer;margin:4px}button:disabled{opacity:.5;cursor:wait}table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}td,th{text-align:left;padding:10px 6px;border-bottom:1px solid #e4ecf5;word-break:break-all}th{font-weight:500}.proxy{color:#0864ef}.direct{color:#15243b}.error{color:#c32727}#status{color:#008b68}#message{min-height:24px}small{color:#556981} .scroll{overflow:auto}
+</style>
+<h1>网络分流工作台 · Mac</h1>
+<p id="status">正在读取本机核心…</p>
+<small>蓝色为代理，黑色为直连。仅管理日常分流，不解除专用应用保护。</small>
+<p><input id="query" placeholder="输入软件、域名或网址搜索" aria-label="搜索">
+<button id="direct">设为国内直连</button><button id="default">恢复默认分流</button><button id="refresh">刷新</button></p>
+<p id="message" role="status"></p>
+<div class="scroll"><table><thead><tr><th>软件</th><th>目标域名 / IP</th><th>路线</th><th>协议</th><th>下载</th><th>上传</th><th>状态</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p><small>近期记录仅在内存保留 10 分钟；恢复默认只移除本工具添加的直连规则。关闭此界面不会停止网络。</small></p>
+<script>
+const token=location.hash.slice(1); history.replaceState(null,'',location.pathname);
+let data=[],busy=false,reading=false;
+const $=id=>document.getElementById(id);
+function bytes(n){return n<1024?`${n} B`:n<1048576?`${(n/1024).toFixed(1)} KB`:`${(n/1048576).toFixed(1)} MB`}
+function render(){let query=$('query').value.trim().toLowerCase();try{if(query.includes('://'))query=new URL(query).hostname.toLowerCase()}catch{}
+const rows=data.filter(row=>[row.app,row.host,row.profile,row.route].join(' ').toLowerCase().includes(query)).slice(0,300);$('rows').replaceChildren();
+for(const row of rows){const tr=document.createElement('tr');tr.className=row.route==='代理'?'proxy':'direct';for(const v of [row.app,row.host,row.route,row.protocol,bytes(row.down),bytes(row.up),row.state]){const td=document.createElement('td');td.textContent=v;tr.append(td)}$('rows').append(tr)}
+if(!rows.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=7;td.textContent='暂无匹配连接；请打开目标网站后稍等，短连接也可能已经结束。';tr.append(td);$('rows').append(tr)}}
+async function call(path,body){const r=await fetch(path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});const d=await r.json();if(!r.ok)throw Error(d.message);return d}
+async function refresh(){if(busy||reading)return;reading=true;try{const d=await call('/api/state');data=d.rows;render();$('status').textContent=d.errors.length?d.errors.join('；'):`日常核心已连接 · ${data.filter(r=>r.state==='连接中').length} 条活动连接`;$('status').style.color=d.errors.length?'#c32727':'#008b68';if(d.writeDisabled)$('direct').disabled=$('default').disabled=true}catch(e){$('status').textContent='本地管理界面已停止或连接失败';$('status').style.color='#c32727'}finally{reading=false}}
+async function change(action){if(busy)return;busy=true;$('direct').disabled=$('default').disabled=true;$('message').textContent='正在检查并保存…';try{const d=await call('/api/route',{domain:$('query').value,action});$('message').textContent=d.message}catch(e){$('message').textContent=e.message}finally{busy=false;$('direct').disabled=$('default').disabled=false;await refresh()}}
+$('query').oninput=render;$('refresh').onclick=refresh;$('direct').onclick=()=>change('Direct');$('default').onclick=()=>change('Default');refresh();setInterval(refresh,3000);
+</script></html>

@@ -1,0 +1,44 @@
+name: Validate source skill
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  macos-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.10'
+      - name: Test macOS installer and local rule transactions
+        run: python3 tests/test_macos.py
+      - name: Test release scanner
+        run: python3 tests/test_release.py
+      - name: Audit source allowlist
+        run: python3 scripts/audit_release.py .
+  windows-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Compile and test with synthetic local cores
+        shell: powershell
+        run: ./tests/Test-Workbench.ps1 -WorkRoot (Join-Path $env:RUNNER_TEMP ('workbench-' + [guid]::NewGuid().ToString('N')))
+      - name: Test release scanner
+        run: python tests/test_release.py
+      - name: Test portable platform entry and Mac logic
+        run: python tests/test_macos.py
+      - name: Test protected-core policy without changing networking
+        shell: powershell
+        run: ./tests/Test-ProtectionPolicy.ps1
+      - name: Test protected-core lifecycle with synthetic routes and loopback stub
+        shell: powershell
+        run: ./tests/Test-ProtectedCore.ps1 -WorkRoot (Join-Path $env:RUNNER_TEMP ('protected-' + [guid]::NewGuid().ToString('N')))
+      - name: Test service-browser planning without launching real browsers
+        shell: powershell
+        run: ./tests/Test-ServiceBrowser.ps1 -WorkRoot (Join-Path $env:RUNNER_TEMP ('service-browser-' + [guid]::NewGuid().ToString('N')))
+      - name: Audit publishable source files
+        run: python scripts/audit_release.py .

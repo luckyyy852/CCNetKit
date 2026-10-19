@@ -1,0 +1,4 @@
+interface:
+  display_name: "网络分流工作台 · Windows / Mac"
+  short_description: "使用自有节点接入现有网络，配置软件分流、Claude Code 保护与路线查询，保留网站中转"
+  default_prompt: "使用 $windows-network-workbench 自动识别 Windows 或 Mac，接入我自己的节点和现有网络，配置软件分流与管理界面，保留已有保护和网站中转，真实配置只保存在本机。"
