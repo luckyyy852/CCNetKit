@@ -79,9 +79,14 @@ class FreshInstall(unittest.TestCase):
                                capture_output=True, timeout=15)
         self.assertEqual(check.returncode, 0)
         log = private / "startup.txt"
-        with log.open("wb") as output:
-            child = subprocess.Popen([sys.executable, "-u", str(runtime), "--root", str(install), "--no-open"],
-                                     stdout=output, stderr=subprocess.DEVNULL)
+        diagnostics = private / "startup-errors.txt"
+        # Capture a stalled child's stack without exposing its local session capability.
+        launcher = ("import faulthandler,runpy,sys; "
+                    "faulthandler.dump_traceback_later(10); "
+                    "sys.argv=sys.argv[1:]; runpy.run_path(sys.argv[0],run_name='__main__')")
+        with log.open("wb") as output, diagnostics.open("wb") as errors:
+            child = subprocess.Popen([sys.executable, "-u", "-c", launcher, str(runtime),
+                                      "--root", str(install), "--no-open"], stdout=output, stderr=errors)
         try:
             deadline = time.monotonic() + 15
             address = None
@@ -92,7 +97,8 @@ class FreshInstall(unittest.TestCase):
                 if address:
                     break
                 time.sleep(0.05)
-            self.assertIsNotNone(address, "Installed UI did not publish a private session address")
+            self.assertIsNotNone(address, "Installed UI did not publish a private session address; "
+                                 + diagnostics.read_text(encoding="utf-8"))
             url = urlsplit(address)
             def request(method, path, value=None, authenticated=True):
                 headers = {}
