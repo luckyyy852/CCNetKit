@@ -4,7 +4,7 @@ CCNetKit · CC护航主要用于 Claude Code 的本机网络适配与专用线�
 
 Windows 使用桌面窗口；Mac 使用本机浏览器界面，两者的搜索和域名按钮用途相同。Mac 不会弹出 Windows 管理员许可，也不提供月度用量或 Windows 专用守卫功能。
 
-安装后，Windows 打开安装目录的 `bin/Workbench.exe`；Mac 双击 `Open Workbench.command`。关闭管理界面不会停止原代理；是否开机连接由原客户端或已配置的启动任务决定。
+安装后，Windows 打开安装目录的 `bin/Workbench.exe`；Mac 双击 `Open CCNetKit.command`。关闭管理界面不会停止原代理；是否开机连接由原客户端或已配置的启动任务决定。
 
 配置完成时，AI 应交付实际打开入口、连接及保护结果、是否开机连接和故障恢复方法。更新技能不会自动升级管理程序；已有安装交给 AI 保留私人设置和域名记录后更新，不反复安装或删除旧目录。
 

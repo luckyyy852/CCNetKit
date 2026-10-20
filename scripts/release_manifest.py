@@ -1,6 +1,6 @@
 """Publishable source and reviewed synthetic demo image. No runtime directories."""
 BINARY_SHA256 = {
-    "assets/workbench-demo.png": "430b5aacad86a5e2da787b07f2712c6617646ed54fa2031cb1198d7e8b0a0bce",
+    "assets/workbench-demo.png": "589b0e70eea083614f551896f6bfa20ae834ef13faf8c1437e6b469e9beed037",
 }
 FILES = (
     ".gitignore", ".gitattributes", ".github/workflows/validate.yml",

@@ -32,13 +32,13 @@
 2. 普通用户运行：
 
    ```sh
-   python3 scripts/workbench.py install --root "$HOME/Tools/NetworkWorkbench" --settings "$HOME/PrivateNetwork/settings.json"
+   python3 scripts/workbench.py install --root "$HOME/Tools/CCNetKit" --settings "$HOME/PrivateNetwork/settings.json"
    ```
 
-3. 双击安装目录的 `Open Workbench.command`，或运行：
+3. 双击安装目录的 `Open CCNetKit.command`，或运行：
 
    ```sh
-   python3 "$HOME/Tools/NetworkWorkbench/bin/mac_workbench.py" --root "$HOME/Tools/NetworkWorkbench"
+   python3 "$HOME/Tools/CCNetKit/bin/mac_workbench.py" --root "$HOME/Tools/CCNetKit"
    ```
 
 安装只复制管理程序和私人设置到新目录，不覆盖已有安装，不启动核心或改系统代理。界面绑定随机回环端口，使用每次启动不同的会话凭据，不对局域网开放。关闭终端进程即停止界面，原网络继续运行；会话地址不要公开。

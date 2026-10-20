@@ -33,7 +33,7 @@ GitHub Actions 在 main 更新、拉取请求或手动运行时检查；发布�
 scripts/release_manifest.py 是唯一白名单来源。新增通用源码时同步更新它；不要为了让扫描通过而把运行文件加入白名单。
 
 ```powershell
-python .\scripts\package_release.py . E:\Releases\windows-network-workbench.zip
+python .\scripts\package_release.py . E:\Releases\ccnetkit.zip
 ```
 
 打包前必须扫描通过，压缩包只收白名单文件，并再次核对内容；同时生成 SHA-256 文件。发布结果应表述为“检查未检出”，不能保证任意未来编辑绝无隐私泄漏。

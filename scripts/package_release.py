@@ -25,9 +25,9 @@ def package(root: Path, output: Path):
             path = root / name
             if path.is_symlink() or root not in path.resolve().parents:
                 raise ValueError("Release source escaped the repository")
-            archive.write(path, "windows-network-workbench/" + name)
+            archive.write(path, "ccnetkit/" + name)
     with zipfile.ZipFile(output) as archive:
-        if sorted(archive.namelist()) != sorted("windows-network-workbench/" + name for name in FILES):
+        if sorted(archive.namelist()) != sorted("ccnetkit/" + name for name in FILES):
             raise ValueError("Archive allowlist verification failed")
     digest = hashlib.sha256(output.read_bytes()).hexdigest()
     output.with_suffix(output.suffix + ".sha256").write_text(digest + "  " + output.name + "\n", encoding="ascii")

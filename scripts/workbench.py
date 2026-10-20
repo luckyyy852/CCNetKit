@@ -40,11 +40,14 @@ def install_mac(root, settings):
         shutil.copyfile(settings, root / "settings.json")
         os.chmod(root / "settings.json", 0o600)
         runtime.atomic_write(root / "data/routes.json", b'{"SchemaVersion":1,"Profiles":{}}\n')
-        launcher = root / "Open Workbench.command"
-        launcher.write_text('#!/bin/sh\ncd -- "$(dirname -- "$0")" || exit 1\nexec '
-                            + "'" + sys.executable.replace("'", "'\"'\"'") + "'"
-                            + ' ./bin/mac_workbench.py --root "$PWD"\n', encoding="utf-8")
-        os.chmod(launcher, 0o700)
+        launch = ('#!/bin/sh\ncd -- "$(dirname -- "$0")" || exit 1\nexec '
+                  + "'" + sys.executable.replace("'", "'\"'\"'") + "'"
+                  + ' ./bin/mac_workbench.py --root "$PWD"\n')
+        # Keep the previous entry usable for existing shortcuts and instructions.
+        for name in ("Open CCNetKit.command", "Open Workbench.command"):
+            launcher = root / name
+            launcher.write_text(launch, encoding="utf-8")
+            os.chmod(launcher, 0o700)
     except Exception:
         # Only the new directory created by this invocation is removed.
         shutil.rmtree(root)

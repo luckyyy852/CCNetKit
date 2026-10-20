@@ -291,6 +291,8 @@ class MacTests(unittest.TestCase):
         result = entry.install_mac(destination, self.root / "settings.json")
         self.assertFalse(result["network_changed"])
         self.assertTrue((destination / "Open Workbench.command").exists())
+        self.assertEqual((destination / "Open CCNetKit.command").read_bytes(),
+                         (destination / "Open Workbench.command").read_bytes())
         self.assertEqual(self.config.read_bytes(), before)
         # Installed runtime must not incorrectly treat its parent as the skill source.
         app.Workbench(destination, source=destination / "bin")

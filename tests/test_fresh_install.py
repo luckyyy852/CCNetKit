@@ -26,9 +26,9 @@ class FreshInstall(unittest.TestCase):
         archive = self.base / "release.zip"
         package(SOURCE, archive)
         with zipfile.ZipFile(archive) as z:
-            self.assertEqual(set(z.namelist()), {"windows-network-workbench/" + f for f in FILES})
+            self.assertEqual(set(z.namelist()), {"ccnetkit/" + f for f in FILES})
             z.extractall(self.base / "New user 下载目录")
-        self.source = self.base / "New user 下载目录/windows-network-workbench"
+        self.source = self.base / "New user 下载目录/ccnetkit"
 
     def tearDown(self):
         self.temp.cleanup()
@@ -72,7 +72,9 @@ class FreshInstall(unittest.TestCase):
         self.assertEqual(hashlib.sha256((install / "settings.json").read_bytes()).digest(), before)
         self.assertEqual(install.stat().st_mode & 0o777, 0o700)
         self.assertEqual((install / "settings.json").stat().st_mode & 0o777, 0o600)
-        self.assertEqual(subprocess.run(["/bin/sh", "-n", str(install / "Open Workbench.command")],
+        self.assertEqual((install / "Open CCNetKit.command").read_bytes(),
+                         (install / "Open Workbench.command").read_bytes())
+        self.assertEqual(subprocess.run(["/bin/sh", "-n", str(install / "Open CCNetKit.command")],
                                        capture_output=True).returncode, 0)
         runtime = install / "bin/mac_workbench.py"
         check = subprocess.run([sys.executable, str(runtime), "--root", str(install), "--inspect"],

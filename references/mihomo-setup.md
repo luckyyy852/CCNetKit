@@ -223,7 +223,7 @@ DNS 端口也要检查空闲；示例 DNS 需要在实际网络能访问，代�
 
 ```powershell
 .\scripts\Inspect-Settings.ps1 -SettingsPath E:\PrivateNetwork\settings.json
-.\scripts\Install-Workbench.ps1 -InstallRoot E:\Tools\NetworkWorkbench -SettingsPath E:\PrivateNetwork\settings.json
+.\scripts\Install-Workbench.ps1 -InstallRoot E:\Tools\CCNetKit -SettingsPath E:\PrivateNetwork\settings.json
 ```
 
 安装后普通用户打开安装目录中的 `bin\Workbench.exe`。安装器只接受新的安装目录；已有安装按 [维护说明](maintenance.md) 更新。若脚本被执行策略阻止，先核对下载来源和文件标记，仅按本机策略处理本次可信脚本，不永久放开全机策略。若新 TUN 内核以管理员运行，后端修改需管理员许可，窗口查询受目标机器权限限制时应核对，不降低内核或配置保护。窗口可搜索实际连接、将指定网址设为国内直连、恢复默认分流。节点订阅更新和启动仍由自己选择的客户端或内核启动方式管理。

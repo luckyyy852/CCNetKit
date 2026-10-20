@@ -6,19 +6,21 @@
 
 ## 怎么使用
 
-打开 [最新发布页](https://github.com/luckyyy852/CCNetKit/releases/latest)，在 Assets 中下载 `windows-network-workbench-v版本号.zip`（不是 Source code）。解压后保留整个 `windows-network-workbench` 文件夹，里面应直接看到 `SKILL.md`。放入对应工具的个人技能目录：
+打开 [最新发布页](https://github.com/luckyyy852/CCNetKit/releases/latest)，在 Assets 中下载 `ccnetkit-v版本号.zip`（不是 Source code）。解压后保留整个 `ccnetkit` 文件夹，里面应直接看到 `SKILL.md`。放入对应工具的个人技能目录：
 
 | AI 工具 | 文件夹放到哪里 | 如何调用 |
 | --- | --- | --- |
-| Codex | `~/.agents/skills/windows-network-workbench/` | `$windows-network-workbench` |
-| Claude Code 本机版 | `~/.claude/skills/windows-network-workbench/` | `/windows-network-workbench` |
+| Codex | `~/.agents/skills/ccnetkit/` | `$ccnetkit` |
+| Claude Code 本机版 | `~/.claude/skills/ccnetkit/` | `/ccnetkit` |
+
+旧版已安装的技能和管理界面仍可使用；更新技能时改用 `ccnetkit` 目录和调用名，原管理界面与网络配置无需迁移。
 
 `~` 是当前用户主目录；找不到目录或工具不识别时，让 AI 按它的实际版本检查，也可直接告诉 AI 解压位置，让它读取该文件夹的 `SKILL.md`。仅上传到网页聊天或云端会话，不能自动配置你的本机网络。[Codex 官方说明](https://developers.openai.com/codex/skills/) / [Claude Code 官方说明](https://code.claude.com/docs/en/skills)。
 
-下面的指令可直接发给 Codex；Claude Code 使用上表中的 `/windows-network-workbench` 调用，再说明相同目标：
+下面的指令可直接发给 Codex；Claude Code 使用上表中的 `/ccnetkit` 调用，再说明相同目标：
 
 ```text
-使用 $windows-network-workbench，识别我的系统，使用我自己的节点为 Claude Code 配置专用网络并安装管理界面，保留已有保护、日常分流和网站中转，不上传私人配置。
+使用 $ccnetkit，识别我的系统，使用我自己的节点为 Claude Code 配置专用网络并安装管理界面，保留已有保护、日常分流和网站中转，不上传私人配置。
 ```
 
 解压后，让能操作本机的 AI 读取 `SKILL.md`。AI 会自动识别系统、检查已有网络，并识别你提供的节点链接、订阅或本地配置；缺少参数时再询问，随后完成安装和连接验证。节点和密钥保存在本机私人文件中。
@@ -50,7 +52,7 @@
 
 工作台的域名按钮需要接入 Mihomo 的持久 JSON 配置，不能直接管理任意 VPN。AI 会先检查兼容性；不能安全接入时保留原客户端，说明限制，不强行替换正常网络。
 
-Mac 支持安装、连接查询、搜索、域名直连和恢复默认功能，目前尚未完成真机验证。月度用量和附带的专用核心守卫仅 Windows 提供。Mac 严格防直连需要另行接入并验证系统出站隔离，不能仅靠代理设置保证。
+Mac 支持安装、连接查询、搜索、域名直连和恢复默认功能，已在 macOS CI 验证安装与本地界面；真实节点接入仍需在使用者机器上验证。月度用量和附带的专用核心守卫仅 Windows 提供。Mac 严格防直连需要另行接入并验证系统出站隔离，不能仅靠代理设置保证。
 
 ## 平时怎么用
 

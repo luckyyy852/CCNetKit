@@ -75,7 +75,7 @@ class ReleaseTests(unittest.TestCase):
             output = base / "release.zip"
             package(root, output)
             with zipfile.ZipFile(output) as archive:
-                self.assertEqual(set(archive.namelist()), {"windows-network-workbench/" + name for name in FILES})
+                self.assertEqual(set(archive.namelist()), {"ccnetkit/" + name for name in FILES})
             self.assertTrue(output.with_suffix(".zip.sha256").exists())
 
     def test_changed_demo_image_blocks_release(self):

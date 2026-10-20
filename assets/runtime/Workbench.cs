@@ -150,8 +150,8 @@ class Workbench:Form {
     Label LabelAt(string text,int x,int y,int w,int h){var l=new Label(){Text=text,Location=new Point(x,y),Size=new Size(w,h)};Controls.Add(l);return l;}
     Button ButtonAt(string text,int x,int y,int w,Action action){var b=new Button(){Text=text,Location=new Point(x,y),Size=new Size(w,30),FlatStyle=FlatStyle.Flat,BackColor=Color.White};b.FlatAppearance.BorderColor=Color.FromArgb(190,210,240);b.Click+=(s,e)=>action();Controls.Add(b);return b;}
     internal Workbench() {
-        Text="网络分流工作台";Font=new Font("Microsoft YaHei UI",9);BackColor=Color.White;ClientSize=new Size(980,660);MinimumSize=new Size(980,660);StartPosition=FormStartPosition.CenterScreen;
-        LabelAt("网络分流工作台",22,20,700,30).Font=new Font(Font.FontFamily,14);
+        Text="CCNetKit · CC护航";Font=new Font("Microsoft YaHei UI",9);BackColor=Color.White;ClientSize=new Size(980,660);MinimumSize=new Size(980,660);StartPosition=FormStartPosition.CenterScreen;
+        LabelAt("CCNetKit · CC护航",22,20,700,30).Font=new Font(Font.FontFamily,14);
         overview=LabelAt("读取本机日常分流…",22,65,930,25);protection=LabelAt("专用保护状态：读取中…",22,98,930,32);
         speed=LabelAt("本次核心累计：—",22,140,930,24);
         ButtonAt("刷新状态",22,174,110,()=>RefreshSnapshot());
@@ -190,7 +190,7 @@ class Workbench:Form {
         current.Rows.Add(new[]{"DevTool.exe","build.example.com:443","代理线路","TCP","6.8 MB","42 KB","连接中","demo-3"});
         current.Rows.Add(new[]{"Sync.exe","files.example.com:443","直连","TCP","1.1 MB","56 KB","连接中","demo-4"});
         current.RuleRows.Add(new[]{"规则命中（演示）","media.example.com（含子域名）","直连","—","—","—","命中 12 次 · 10:30:00"});
-        Controls[0].Text="网络分流工作台 · 虚构数据演示";
+        Controls[0].Text="CCNetKit · CC护航 · 虚构数据演示";
         overview.Text="日常核心在线 1 · TUN 已启用 · 当前连接 4（代理 2 / 直连 2）";overview.ForeColor=Green;
         protection.Text="专用保护：演示环境未接入守卫；此图不代表已建立防直连隔离";protection.ForeColor=Color.FromArgb(150,80,0);
         speed.Text="本次核心累计：下载 1.2 GB / 上传 86.0 MB（虚构数据）";

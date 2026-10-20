@@ -1,4 +1,4 @@
 interface:
   display_name: "CCNetKit · CC护航"
   short_description: "CCNetKit · CC护航：使用自有节点为 Claude Code 配置专用线路，兼顾日常分流与网站中转"
-  default_prompt: "使用 $windows-network-workbench 自动识别 Windows 或 Mac，使用我自己的节点为 Claude Code 配置专用网络与管理界面，保留已有保护、日常分流和网站中转，真实配置只保存在本机。"
+  default_prompt: "使用 $ccnetkit 自动识别 Windows 或 Mac，使用我自己的节点为 Claude Code 配置专用网络与管理界面，保留已有保护、日常分流和网站中转，真实配置只保存在本机。"

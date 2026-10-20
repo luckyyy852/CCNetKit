@@ -13,7 +13,7 @@ try{
     if(-not $ArchivePath){$ArchivePath=Join-Path $work 'release.zip';& $PythonExecutable (Join-Path $repo 'scripts\package_release.py') $repo $ArchivePath;if($LASTEXITCODE){throw 'Packaging failed.'}}
     $download=Join-Path $work 'New user 下载目录';$null=New-Item -ItemType Directory -Path $download
     Expand-Archive -LiteralPath $ArchivePath -DestinationPath $download
-    $source=Join-Path $download 'windows-network-workbench'
+    $source=Join-Path $download 'ccnetkit'
     Check (Test-Path -LiteralPath (Join-Path $source 'SKILL.md')) 'Unpacked skill is discoverable at the documented depth'
     Check (-not (Test-Path -LiteralPath (Join-Path $source 'settings.json'))) 'Release contains no private settings'
     $private=Join-Path $work 'Private user 用户';$null=New-Item -ItemType Directory -Path $private

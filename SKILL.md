@@ -1,5 +1,5 @@
 ---
-name: windows-network-workbench
+name: ccnetkit
 description: CCNetKit · CC护航，专为 Claude Code 的本机网络适配与专用线路配置设计，自动识别 Windows 或 macOS，使用自有节点接入 Mihomo，兼顾日常分流、软件接入和网站中转；Windows 附专用核心守卫，Mac 保护按目标机能力单独验证。
 ---
 
@@ -9,7 +9,7 @@ description: CCNetKit · CC护航，专为 Claude Code 的本机网络适配与�
 
 ## 自动识别系统
 
-先从执行环境识别操作系统，不让用户手动挑版本。已有 Python 时运行 `scripts/workbench.py detect`；否则 Windows 读取系统环境，Mac 用 `uname -s`。技能目录名保持不变。
+先从执行环境识别操作系统，不让用户手动挑版本。已有 Python 时运行 `scripts/workbench.py detect`；否则 Windows 读取系统环境，Mac 用 `uname -s`。Windows 与 Mac 共用 `ccnetkit` 技能目录；更新技能不迁移已有管理界面或私人配置。
 
 - Windows：使用下方原有 PowerShell / WinForms 流程，无需新增 Python；原安装脚本、界面和设置格式不变。
 - macOS：读取 [Mac 接入流程](references/macos.md)，使用同一包的 Python 安装入口和本地浏览器界面。后续共用节点、服务域名及已有网络兼容原则，跳过所有 Windows 专用命令与保护实现。
