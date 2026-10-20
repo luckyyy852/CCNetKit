@@ -6,7 +6,7 @@
 
 ## 怎么使用
 
-打开 [最新发布页](https://github.com/luckyyy852/windows-network-workbench/releases/latest)，在 Assets 中下载 `windows-network-workbench-v版本号.zip`（不是 Source code）。解压后保留整个 `windows-network-workbench` 文件夹，里面应直接看到 `SKILL.md`。放入对应工具的个人技能目录：
+打开 [最新发布页](https://github.com/luckyyy852/CCNetKit/releases/latest)，在 Assets 中下载 `windows-network-workbench-v版本号.zip`（不是 Source code）。解压后保留整个 `windows-network-workbench` 文件夹，里面应直接看到 `SKILL.md`。放入对应工具的个人技能目录：
 
 | AI 工具 | 文件夹放到哪里 | 如何调用 |
 | --- | --- | --- |
